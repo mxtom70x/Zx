@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,6 +12,39 @@
     
     <!-- Styles -->
     <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Bot Detection Script -->
+    <script>
+        // Detect common scraping tools and bots
+        const isBot = () => {
+            const userAgent = navigator.userAgent.toLowerCase();
+            const botPatterns = [
+                'headless', 'phantom', 'selenium', 'puppeteer', 'cheerio',
+                'scrapy', 'curl', 'wget', 'python', 'node', 'java',
+                'crawler', 'spider', 'bot', 'crawling', 'scraping'
+            ];
+            
+            return botPatterns.some(pattern => userAgent.includes(pattern));
+        };
+        
+        // Check for automation tools
+        const isAutomated = () => {
+            // Check for WebDriver property (Selenium)
+            if (window.navigator.webdriver === true) return true;
+            
+            // Check for automation properties
+            if (navigator.plugins.length === 0) return true;
+            if (navigator.languages === '') return true;
+            if (navigator.userAgent.includes('Headless')) return true;
+            
+            return false;
+        };
+        
+        // Show fake error page for bots
+        if (isBot() || isAutomated()) {
+            window.location.href = '403.html';
+        }
+    </script>
     
     <!-- Ad Script 1 -->
     <script src="https://quge5.com/88/tag.min.js" data-zone="187289" async data-cfasync="false"></script>
@@ -281,7 +315,7 @@
         </div>
         
         <div class="footer">
-            <p>TEAM #ZX_BOSS_ARMY 👑 | Cyber Security Specialist</p>
+            <p>TEAM #ZX_BOSS 👑 | Cyber Security Specialist</p>
             <p> Almost Everyone is Developer But using Ai </p>
         </div>
     </div>
@@ -293,7 +327,7 @@
         </button>
     </div>
     
-    <!-- Audio Element - UPDATED FOR MP3 -->
+    <!-- Audio Element -->
     <audio id="bgAudio" loop autoplay>
         <source src="assets/audio/bg-music.mp3" type="audio/mpeg">
         <source src="assets/audio/bg-music.ogg" type="audio/ogg">
