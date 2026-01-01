@@ -1,0 +1,21 @@
+# Block known bad bots
+RewriteEngine On
+
+# Block common scraper user agents
+RewriteCond %{HTTP_USER_AGENT} (headless|phantom|selenium|puppeteer|scrapy|curl|wget|python|java) [NC]
+RewriteRule .* - [F,L]
+
+# Block suspicious requests
+RewriteCond %{REQUEST_METHOD} ^(HEAD|TRACE|DELETE|TRACK|DEBUG) [NC]
+RewriteRule .* - [F,L]
+
+# Block direct access to certain files
+<FilesMatch "\.(htaccess|htpasswd|ini|log|sh|inc|bak|sql|db)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Protect against SQL injection
+RewriteCond %{QUERY_STRING} (localhost|127\.0\.0\.1) [NC,OR]
+RewriteCond %{QUERY_STRING} (SELECT|UNION|INSERT|DELETE|UPDATE|DROP) [NC]
+RewriteRule .* - [F,L]
