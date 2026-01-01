@@ -13,40 +13,7 @@
     <!-- Styles -->
     <link rel="stylesheet" href="css/style.css">
     
-    <!-- Bot Detection Script -->
-    <script>
-        // Detect common scraping tools and bots
-        const isBot = () => {
-            const userAgent = navigator.userAgent.toLowerCase();
-            const botPatterns = [
-                'headless', 'phantom', 'selenium', 'puppeteer', 'cheerio',
-                'scrapy', 'curl', 'wget', 'python', 'node', 'java',
-                'crawler', 'spider', 'bot', 'crawling', 'scraping'
-            ];
-            
-            return botPatterns.some(pattern => userAgent.includes(pattern));
-        };
-        
-        // Check for automation tools
-        const isAutomated = () => {
-            // Check for WebDriver property (Selenium)
-            if (window.navigator.webdriver === true) return true;
-            
-            // Check for automation properties
-            if (navigator.plugins.length === 0) return true;
-            if (navigator.languages === '') return true;
-            if (navigator.userAgent.includes('Headless')) return true;
-            
-            return false;
-        };
-        
-        // Show fake error page for bots
-        if (isBot() || isAutomated()) {
-            window.location.href = '403.html';
-        }
-    </script>
-    
-    <!-- Ad Script 1 -->
+    <!-- Ad Scripts -->
     <script src="https://quge5.com/88/tag.min.js" data-zone="187289" async data-cfasync="false"></script>
 </head>
 <body>
@@ -67,7 +34,7 @@
     <!-- Ads Container -->
     <div class="ads-container">
         <!-- Top Ad -->
-        <div class="ad-banner ad-top">
+        <div class="ad-banner ad-top" id="adTop">
             <script>
                 atOptions = {
                     'key' : 'dc3672a068d5bdf9224e541c501ecdcb',
@@ -95,7 +62,7 @@
         </div>
         
         <!-- Middle Ad -->
-        <div class="ad-banner ad-middle">
+        <div class="ad-banner ad-middle" id="adMiddle">
             <script>
                 atOptions = {
                     'key' : '6489a987b8fa768ba23fa47ade79019f',
@@ -288,7 +255,7 @@
         </div>
         
         <!-- Bottom Ad -->
-        <div class="ad-banner ad-bottom">
+        <div class="ad-banner ad-bottom" id="adBottom">
             <script>
                 atOptions = {
                     'key' : 'dc3672a068d5bdf9224e541c501ecdcb',
@@ -315,7 +282,7 @@
         </div>
         
         <div class="footer">
-            <p>TEAM #ZX_BOSS 👑 | Cyber Security Specialist</p>
+            <p>TEAM #ZX_BOSS_ARMY 👑 | Cyber Security Specialist</p>
             <p> Almost Everyone is Developer But using Ai </p>
         </div>
     </div>
@@ -337,7 +304,286 @@
     <!-- Additional Ad Scripts -->
     <script>(function(s){s.dataset.zone='10222246',s.src='https://gizokraijaw.net/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
 
-    <!-- Main Script -->
-    <script src="js/script.js"></script>
+    <!-- Main Script with IMPROVED Bot Detection -->
+    <script>
+        // ==================== IMPROVED BOT DETECTION ====================
+        // This will NOT block normal users or ad blockers
+        
+        function checkForBots() {
+            const userAgent = navigator.userAgent.toLowerCase();
+            
+            // ONLY check for CLEAR automation tools, not ad blockers
+            const clearBotPatterns = [
+                'headlesschrome',
+                'phantomjs',
+                'selenium',
+                'puppeteer',
+                'playwright',
+                'webdriver',
+                'cheerio',
+                'scrapy',
+                'crawler',
+                'spider'
+            ];
+            
+            // Count bot signals
+            let botScore = 0;
+            
+            // 1. Check user agent for clear automation tools
+            clearBotPatterns.forEach(pattern => {
+                if (userAgent.includes(pattern)) {
+                    botScore += 3; // Strong signal
+                }
+            });
+            
+            // 2. Check for WebDriver property (Selenium)
+            if (navigator.webdriver === true) {
+                botScore += 2;
+            }
+            
+            // 3. Check for headless browser patterns
+            if (navigator.plugins.length === 0) {
+                botScore += 0.5; // Weak signal - could be normal browser
+            }
+            
+            // 4. Check if it's a known scraper IP (this would need backend)
+            // For now, just track suspicious behavior
+            
+            // 5. Check for automation-like behavior
+            if (window.outerWidth - window.innerWidth > 300 || 
+                window.outerHeight - window.innerHeight > 300) {
+                botScore += 0.5; // Dev tools might be open
+            }
+            
+            // Only redirect if VERY CLEAR bot evidence (score >= 4)
+            // This ensures normal users with ad blockers won't be affected
+            if (botScore >= 4) {
+                console.log("Clear bot detected, showing fake page");
+                // Create fake page overlay instead of redirect
+                showFakeErrorPage();
+                return true;
+            }
+            
+            return false;
+        }
+        
+        function showFakeErrorPage() {
+            const fakePageHTML = `
+                <div style="
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: #000;
+                    color: #fff;
+                    font-family: monospace;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    z-index: 99999;
+                    padding: 20px;
+                    text-align: center;
+                ">
+                    <div>
+                        <h1 style="color: #ff0000; font-size: 3em;">403 Forbidden</h1>
+                        <p style="font-size: 1.2em;">Directory access is forbidden.</p>
+                        <p>Server unable to read htaccess file, denying access to be safe</p>
+                        
+                        <!-- Show ads even on fake page -->
+                        <div style="margin: 30px 0; padding: 20px; background: #111; border: 1px solid #333;">
+                            <script>
+                                atOptions = {
+                                    'key' : 'dc3672a068d5bdf9224e541c501ecdcb',
+                                    'format' : 'iframe',
+                                    'height' : 50,
+                                    'width' : 320,
+                                    'params' : {}
+                                };
+                            </script>
+                            <script src="https://cranegarnishextinct.com/dc3672a068d5bdf9224e541c501ecdcb/invoke.js"></script>
+                        </div>
+                        
+                        <div style="color: #666; font-size: 0.9em; margin-top: 30px;">
+                            <p>Apache/2.4.52 (Ubuntu) Server at zx-boss.com Port 443</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            const fakeDiv = document.createElement('div');
+            fakeDiv.innerHTML = fakePageHTML;
+            document.body.appendChild(fakeDiv);
+            
+            // Hide the real content
+            document.getElementById('mainContent').style.display = 'none';
+            document.querySelector('.audio-control').style.display = 'none';
+        }
+        
+        // ==================== MAIN SITE FUNCTIONALITY ====================
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const loadingScreen = document.getElementById('loading-screen');
+            const mainContent = document.getElementById('mainContent');
+            const audio = document.getElementById('bgAudio');
+            
+            // Wait for page to fully load
+            window.addEventListener('load', function() {
+                // Run bot check AFTER page loads
+                setTimeout(() => {
+                    const isBot = checkForBots();
+                    
+                    if (!isBot) {
+                        // HUMAN DETECTED - Show everything
+                        console.log("Human visitor detected, showing full site");
+                        
+                        // Show main content
+                        loadingScreen.style.opacity = '0';
+                        setTimeout(() => {
+                            loadingScreen.style.display = 'none';
+                            mainContent.style.opacity = '1';
+                            mainContent.style.transform = 'translateY(0)';
+                            
+                            // Show all ads
+                            document.getElementById('adTop').style.display = 'block';
+                            document.getElementById('adMiddle').style.display = 'block';
+                            document.getElementById('adBottom').style.display = 'block';
+                            
+                            // Start audio
+                            initAudio();
+                            
+                            // Start matrix rain
+                            initMatrixRain();
+                            
+                        }, 1000);
+                    }
+                    // If bot, showFakeErrorPage() already called
+                }, 2000);
+            });
+            
+            // Initialize Matrix Rain
+            function initMatrixRain() {
+                const matrixRain = document.getElementById('matrixRain');
+                const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$#@%&*';
+                
+                function createMatrixChar() {
+                    const char = document.createElement('div');
+                    char.className = 'matrix-char';
+                    char.textContent = chars.charAt(Math.floor(Math.random() * chars.length));
+                    char.style.left = Math.random() * 100 + 'vw';
+                    char.style.animationDuration = (Math.random() * 5 + 3) + 's';
+                    char.style.fontSize = (Math.random() * 10 + 14) + 'px';
+                    char.style.opacity = Math.random() * 0.7 + 0.3;
+                    char.style.color = Math.random() > 0.5 ? '#00ff00' : '#00aa00';
+                    matrixRain.appendChild(char);
+                    
+                    setTimeout(() => {
+                        if (char.parentNode === matrixRain) {
+                            char.remove();
+                        }
+                    }, 8000);
+                }
+                
+                setInterval(createMatrixChar, 100);
+                
+                for (let i = 0; i < 50; i++) {
+                    setTimeout(createMatrixChar, i * 100);
+                }
+            }
+            
+            // Initialize Audio
+            function initAudio() {
+                const audio = document.getElementById('bgAudio');
+                const audioToggle = document.getElementById('audioToggle');
+                const audioIcon = document.getElementById('audioIcon');
+                
+                audio.loop = true;
+                audio.volume = 0.5;
+                
+                // Try to play audio
+                const playAudio = () => {
+                    audio.play()
+                        .then(() => {
+                            console.log("Audio started");
+                            audio.addEventListener('ended', function() {
+                                this.currentTime = 0;
+                                this.play().catch(e => console.log("Couldn't restart audio"));
+                            });
+                            
+                            if (audioToggle && audioIcon) {
+                                audioIcon.className = 'fas fa-volume-up';
+                                audioToggle.title = "Click to mute";
+                            }
+                        })
+                        .catch(error => {
+                            console.log("Autoplay prevented");
+                            
+                            // Try on user interaction
+                            const playOnInteraction = () => {
+                                audio.play()
+                                    .then(() => {
+                                        console.log("Audio started after interaction");
+                                        if (audioToggle && audioIcon) {
+                                            audioIcon.className = 'fas fa-volume-up';
+                                            audioToggle.title = "Click to mute";
+                                        }
+                                    })
+                                    .catch(e => console.log("Still blocked"));
+                            };
+                            
+                            document.addEventListener('click', playOnInteraction, { once: true });
+                            document.addEventListener('keydown', playOnInteraction, { once: true });
+                            
+                            if (audioToggle && audioIcon) {
+                                audioIcon.className = 'fas fa-volume-mute';
+                                audioToggle.title = "Click to enable sound";
+                            }
+                        });
+                };
+                
+                playAudio();
+                
+                // Audio toggle
+                if (audioToggle && audioIcon) {
+                    audioToggle.addEventListener('click', function() {
+                        if (audio.muted) {
+                            audio.muted = false;
+                            audioIcon.className = 'fas fa-volume-up';
+                            audioToggle.title = "Click to mute";
+                        } else {
+                            audio.muted = true;
+                            audioIcon.className = 'fas fa-volume-mute';
+                            audioToggle.title = "Click to unmute";
+                        }
+                    });
+                }
+            }
+            
+            // ==================== MINIMAL SECURITY ====================
+            // These won't affect normal users
+            
+            // Prevent right-click menu
+            document.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+            });
+            
+            // Prevent text selection
+            document.addEventListener('selectstart', function(e) {
+                e.preventDefault();
+            });
+            
+            // Prevent image drag
+            document.querySelectorAll('img').forEach(img => {
+                img.addEventListener('dragstart', function(e) {
+                    e.preventDefault();
+                });
+            });
+            
+            // Basic copy protection
+            document.addEventListener('copy', function(e) {
+                e.preventDefault();
+            });
+        });
+    </script>
 </body>
 </html>
